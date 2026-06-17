@@ -1,41 +1,48 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Classe da interface gráfica (GUI) do sistema de biblioteca
 public class BibliotecaGUI extends JFrame {
 
+    // Instância principal da lógica da biblioteca
     private Biblioteca biblioteca = new Biblioteca();
 
+    // Área de texto onde será mostrado o output do sistema
     private JTextArea output = new JTextArea(20, 50);
 
     public BibliotecaGUI() {
 
+        // ===================== CONFIGURAÇÃO DA JANELA =====================
         setTitle("Sistema de Biblioteca");
         setSize(800, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // layout principal da janela
         setLayout(new BorderLayout());
 
-        // ===== PAINEL DE BOTOES =====
+        // ===================== PAINEL DE BOTÕES =====================
         JPanel panel = new JPanel(new GridLayout(4, 3, 5, 5));
 
-        // LIVROS
+        // ===================== BOTÕES DE LIVROS =====================
         JButton addLivro = new JButton("Adicionar Livro");
         JButton listarLivros = new JButton("Listar Livros");
         JButton removerLivro = new JButton("Remover Livro");
 
-        // UTILIZADORES
+        // ===================== BOTÕES DE UTILIZADORES =====================
         JButton addUser = new JButton("Adicionar Utilizador");
         JButton listarUsers = new JButton("Listar Utilizadores");
         JButton removerUser = new JButton("Remover Utilizador");
 
-        // EMPRÉSTIMOS
+        // ===================== BOTÕES DE EMPRÉSTIMOS =====================
         JButton emprestar = new JButton("Emprestar Livro");
         JButton devolver = new JButton("Devolver Livro");
         JButton listarEmp = new JButton("Listar Empréstimos");
 
-        // OUTROS
+        // ===================== OUTROS =====================
         JButton historico = new JButton("Histórico");
         JButton limpar = new JButton("Limpar Tela");
 
+        // Adiciona os botões ao painel
         panel.add(addLivro);
         panel.add(listarLivros);
         panel.add(removerLivro);
@@ -51,14 +58,16 @@ public class BibliotecaGUI extends JFrame {
         panel.add(historico);
         panel.add(limpar);
 
+        // coloca o painel no topo da janela
         add(panel, BorderLayout.NORTH);
 
-        // ===== ÁREA DE SAÍDA =====
+        // ===================== ÁREA DE OUTPUT =====================
         output.setEditable(false);
         add(new JScrollPane(output), BorderLayout.CENTER);
 
-        // ===== AÇÕES =====
+        // ===================== AÇÕES DOS BOTÕES =====================
 
+        // ---- ADICIONAR LIVRO ----
         addLivro.addActionListener(e -> {
             String titulo = JOptionPane.showInputDialog("Título:");
             String autor = JOptionPane.showInputDialog("Autor:");
@@ -70,6 +79,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Livro adicionado: " + titulo + "\n");
         });
 
+        // ---- LISTAR LIVROS ----
         listarLivros.addActionListener(e -> {
 
             output.append("\n--- LIVROS ---\n");
@@ -79,6 +89,7 @@ public class BibliotecaGUI extends JFrame {
             }
         });
 
+        // ---- REMOVER LIVRO ----
         removerLivro.addActionListener(e -> {
             String isbn = JOptionPane.showInputDialog("ISBN do livro:");
             biblioteca.removerLivro(isbn);
@@ -86,6 +97,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Livro removido (ISBN: " + isbn + ")\n");
         });
 
+        // ---- ADICIONAR UTILIZADOR ----
         addUser.addActionListener(e -> {
             int id = Integer.parseInt(JOptionPane.showInputDialog("ID:"));
             String nome = JOptionPane.showInputDialog("Nome:");
@@ -97,6 +109,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Utilizador adicionado: " + nome + "\n");
         });
 
+        // ---- LISTAR UTILIZADORES ----
         listarUsers.addActionListener(e -> {
 
             output.append("\n--- UTILIZADORES ---\n");
@@ -106,6 +119,7 @@ public class BibliotecaGUI extends JFrame {
             }
         });
 
+        // ---- REMOVER UTILIZADOR ----
         removerUser.addActionListener(e -> {
             int id = Integer.parseInt(JOptionPane.showInputDialog("ID Utilizador:"));
             biblioteca.removerUtilizador(id);
@@ -113,6 +127,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Utilizador removido: " + id + "\n");
         });
 
+        // ---- EMPRESTAR LIVRO ----
         emprestar.addActionListener(e -> {
             String isbn = JOptionPane.showInputDialog("ISBN:");
             int id = Integer.parseInt(JOptionPane.showInputDialog("ID Utilizador:"));
@@ -122,6 +137,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Empréstimo realizado\n");
         });
 
+        // ---- DEVOLVER LIVRO ----
         devolver.addActionListener(e -> {
             String isbn = JOptionPane.showInputDialog("ISBN:");
             biblioteca.devolverLivro(isbn);
@@ -129,6 +145,7 @@ public class BibliotecaGUI extends JFrame {
             output.append("Livro devolvido\n");
         });
 
+        // ---- LISTAR EMPRÉSTIMOS ----
         listarEmp.addActionListener(ev -> {
 
             output.append("\n--- EMPRÉSTIMOS ---\n");
@@ -138,6 +155,7 @@ public class BibliotecaGUI extends JFrame {
             }
         });
 
+        // ---- HISTÓRICO ----
         historico.addActionListener(e -> {
 
             output.append("\n--- HISTÓRICO ---\n");
@@ -147,11 +165,14 @@ public class BibliotecaGUI extends JFrame {
             }
         });
 
+        // ---- LIMPAR TELA ----
         limpar.addActionListener(e -> output.setText(""));
 
+        // mostra a janela
         setVisible(true);
     }
 
+    // ponto de entrada da aplicação GUI
     public static void main(String[] args) {
         new BibliotecaGUI();
     }

@@ -1,9 +1,13 @@
 public class Utilizador {
 
-    private int id;
-    private String nome;
-    private String email;
-    private String telefone;
+    // ===================== ATRIBUTOS =====================
+
+    private int id;               // identificador único do utilizador
+    private String nome;          // nome do utilizador
+    private String email;         // email do utilizador
+    private String telefone;      // contacto telefónico
+
+    // ===================== CONSTRUTOR =====================
 
     public Utilizador(int id, String nome, String email, String telefone) {
         this.id = id;
@@ -11,6 +15,8 @@ public class Utilizador {
         this.email = email;
         this.telefone = telefone;
     }
+
+    // ===================== GETTERS =====================
 
     public int getId() {
         return id;
@@ -28,6 +34,8 @@ public class Utilizador {
         return telefone;
     }
 
+    // ===================== SETTERS =====================
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -39,6 +47,8 @@ public class Utilizador {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    // ===================== TO STRING =====================
 
     @Override
     public String toString() {

@@ -1,16 +1,22 @@
 import java.util.Scanner;
 
+// Classe principal do programa (ponto de entrada)
 public class Main {
 
     public static void main(String[] args) {
 
+        // Scanner para leitura de dados do teclado
         Scanner sc = new Scanner(System.in);
+
+        // Criação do objeto Biblioteca (onde ficam livros, utilizadores e empréstimos)
         Biblioteca biblioteca = new Biblioteca();
 
         int opcao;
 
+        // Loop principal do menu (repete até o utilizador escolher sair)
         do {
 
+            // MENU PRINCIPAL
             System.out.println("\n==============================");
             System.out.println("       SISTEMA BIBLIOTECA     ");
             System.out.println("==============================");
@@ -41,13 +47,18 @@ public class Main {
             System.out.println("7  - Histórico");
             System.out.println("0  - Sair");
 
+            // Leitura da opção escolhida pelo utilizador
             System.out.print("\nOpção: ");
             opcao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // limpa o buffer (evita bugs com nextLine)
 
+            // Estrutura de decisão baseada na opção escolhida
             switch (opcao) {
 
+                // ===================== LIVROS =====================
+
                 case 1 -> {
+                    // Adicionar livro
                     System.out.print("Título: ");
                     String titulo = sc.nextLine();
 
@@ -61,50 +72,14 @@ public class Main {
                     int ano = sc.nextInt();
                     sc.nextLine();
 
+                    // Cria e adiciona livro à biblioteca
                     biblioteca.adicionarLivro(new Livro(titulo, autor, isbn, ano));
                 }
 
                 case 2 -> biblioteca.listarLivros();
 
-                case 3 -> {
-                    System.out.print("ID: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
-
-                    System.out.print("Nome: ");
-                    String nome = sc.nextLine();
-
-                    System.out.print("Email: ");
-                    String email = sc.nextLine();
-
-                    System.out.print("Telefone: ");
-                    String telefone = sc.nextLine();
-
-                    biblioteca.adicionarUtilizador(new Utilizador(id, nome, email, telefone));
-                }
-
-                case 4 -> {
-                    System.out.print("ISBN: ");
-                    String isbn = sc.nextLine();
-
-                    System.out.print("ID Utilizador: ");
-                    int id = sc.nextInt();
-
-                    biblioteca.realizarEmprestimo(isbn, id);
-                }
-
-                case 5 -> {
-                    System.out.print("ISBN: ");
-                    String isbn = sc.nextLine();
-
-                    biblioteca.devolverLivro(isbn);
-                }
-
-                case 6 -> biblioteca.listarEmprestimos();
-
-                case 7 -> biblioteca.mostrarHistorico();
-
                 case 8 -> {
+                    // Atualizar livro
                     System.out.print("ISBN: ");
                     String isbn = sc.nextLine();
 
@@ -121,12 +96,62 @@ public class Main {
                 }
 
                 case 9 -> {
+                    // Remover livro
                     System.out.print("ISBN: ");
                     String isbn = sc.nextLine();
                     biblioteca.removerLivro(isbn);
                 }
 
+                case 13 -> {
+                    // Buscar por ISBN
+                    System.out.print("ISBN: ");
+                    String isbn = sc.nextLine();
+
+                    System.out.println(biblioteca.buscarLivroISBN(isbn));
+                }
+
+                case 14 -> {
+                    // Buscar por título
+                    System.out.print("Título: ");
+                    String titulo = sc.nextLine();
+
+                    System.out.println(biblioteca.buscarLivroTitulo(titulo));
+                }
+
+                case 15 -> {
+                    // Buscar por autor
+                    System.out.print("Autor: ");
+                    String autor = sc.nextLine();
+
+                    for (Livro l : biblioteca.buscarLivroAutor(autor)) {
+                        System.out.println(l);
+                    }
+                }
+
+                // ===================== UTILIZADORES =====================
+
+                case 3 -> {
+                    // Adicionar utilizador
+                    System.out.print("ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Nome: ");
+                    String nome = sc.nextLine();
+
+                    System.out.print("Email: ");
+                    String email = sc.nextLine();
+
+                    System.out.print("Telefone: ");
+                    String telefone = sc.nextLine();
+
+                    biblioteca.adicionarUtilizador(new Utilizador(id, nome, email, telefone));
+                }
+
+                case 12 -> biblioteca.listarUtilizadores();
+
                 case 10 -> {
+                    // Atualizar utilizador
                     System.out.print("ID: ");
                     int id = sc.nextInt();
                     sc.nextLine();
@@ -144,37 +169,14 @@ public class Main {
                 }
 
                 case 11 -> {
+                    // Remover utilizador
                     System.out.print("ID: ");
                     int id = sc.nextInt();
                     biblioteca.removerUtilizador(id);
                 }
 
-                case 12 -> biblioteca.listarUtilizadores();
-
-                case 13 -> {
-                    System.out.print("ISBN: ");
-                    String isbn = sc.nextLine();
-
-                    System.out.println(biblioteca.buscarLivroISBN(isbn));
-                }
-
-                case 14 -> {
-                    System.out.print("Título: ");
-                    String titulo = sc.nextLine();
-
-                    System.out.println(biblioteca.buscarLivroTitulo(titulo));
-                }
-
-                case 15 -> {
-                    System.out.print("Autor: ");
-                    String autor = sc.nextLine();
-
-                    for (Livro l : biblioteca.buscarLivroAutor(autor)) {
-                        System.out.println(l);
-                    }
-                }
-
                 case 16 -> {
+                    // Buscar utilizador por ID
                     System.out.print("ID: ");
                     int id = sc.nextInt();
 
@@ -182,19 +184,49 @@ public class Main {
                 }
 
                 case 17 -> {
+                    // Buscar utilizador por nome
                     System.out.print("Nome: ");
                     String nome = sc.nextLine();
 
                     System.out.println(biblioteca.buscarUtilizadorNome(nome));
                 }
 
+                // ===================== EMPRÉSTIMOS =====================
+
+                case 4 -> {
+                    // Realizar empréstimo
+                    System.out.print("ISBN: ");
+                    String isbn = sc.nextLine();
+
+                    System.out.print("ID Utilizador: ");
+                    int id = sc.nextInt();
+
+                    biblioteca.realizarEmprestimo(isbn, id);
+                }
+
+                case 5 -> {
+                    // Devolver livro
+                    System.out.print("ISBN: ");
+                    String isbn = sc.nextLine();
+
+                    biblioteca.devolverLivro(isbn);
+                }
+
+                case 6 -> biblioteca.listarEmprestimos();
+
+                case 7 -> biblioteca.mostrarHistorico();
+
+                // ===================== SAÍDA =====================
+
                 case 0 -> System.out.println("Programa encerrado.");
 
+                // Caso inválido
                 default -> System.out.println("Opção inválida.");
             }
 
-        } while (opcao != 0);
+        } while (opcao != 0); // repete enquanto não sair
 
+        // Fecha o scanner (boa prática)
         sc.close();
     }
 }

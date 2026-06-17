@@ -1,18 +1,26 @@
 public class Livro {
 
-    private String titulo;
-    private String autor;
-    private String isbn;
-    private int anoPublicacao;
-    private boolean disponivel;
+    // ===================== ATRIBUTOS =====================
+
+    private String titulo;          // título do livro
+    private String autor;           // autor do livro
+    private String isbn;            // identificador único do livro
+    private int anoPublicacao;      // ano em que foi publicado
+    private boolean disponivel;     // indica se o livro está disponível para empréstimo
+
+    // ===================== CONSTRUTOR =====================
 
     public Livro(String titulo, String autor, String isbn, int anoPublicacao) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
+
+        // por padrão, quando um livro é criado, ele está disponível
         this.disponivel = true;
     }
+
+    // ===================== GETTERS E SETTERS =====================
 
     public String getTitulo() {
         return titulo;
@@ -34,6 +42,7 @@ public class Livro {
         return isbn;
     }
 
+    // OBS: normalmente ISBN não deveria ser alterado, mas aqui está permitido
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
@@ -53,6 +62,8 @@ public class Livro {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
+
+    // ===================== REPRESENTAÇÃO EM TEXTO =====================
 
     @Override
     public String toString() {
