@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+//Trabalho prático de Programação Orientada a Objetos - Sistema de Biblioteca
+//Alunos: Danilo Alves e Lucas Modesto
+
+
 // Classe principal do programa (ponto de entrada)
 public class Main {
 
