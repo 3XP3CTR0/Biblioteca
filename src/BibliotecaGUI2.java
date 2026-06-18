@@ -312,6 +312,68 @@ public class BibliotecaGUI2 extends JFrame {
             );
         });
 
+        //adicionar utilizador
+        addUser.addActionListener(e -> {
+
+                String nome = JOptionPane.showInputDialog("Nome:");
+                String email = JOptionPane.showInputDialog("Email:");
+                String telefone = JOptionPane.showInputDialog("Telefone:");
+                int id = Integer.parseInt(JOptionPane.showInputDialog("ID:"));
+
+                biblioteca.adicionarUtilizador(
+                        new Utilizador(id, nome, email, telefone)
+                );
+
+                output.append("✅ Utilizador adicionado: " + nome + "\n");
+        });
+
+        emprestar.addActionListener(e -> {
+
+                String isbn = JOptionPane.showInputDialog("ISBN:");
+                int id = Integer.parseInt(JOptionPane.showInputDialog("ID Utilizador:"));
+
+                biblioteca.realizarEmprestimo(isbn, id);
+
+                output.append("📚 Empréstimo realizado\n");
+        });
+
+        devolver.addActionListener(e -> {
+
+                String isbn = JOptionPane.showInputDialog("ISBN:");
+
+                biblioteca.devolverLivro(isbn);
+
+                output.append("📥 Livro devolvido\n");
+        });
+
+        listarEmp.addActionListener(e -> {
+
+                output.append("\n===== EMPRÉSTIMOS =====\n");
+
+                for (Emprestimo emp : biblioteca.getEmprestimos()) {
+                        output.append(emp + "\n------------------\n");
+                }
+        });
+
+        historico.addActionListener(e -> {
+
+                output.append("\n===== HISTÓRICO =====\n");
+
+                for (String h : biblioteca.getHistorico()) {
+                        output.append(h + "\n");
+                }
+        });
+
+        // Listar todos os utilizadores
+        listarUsers.addActionListener(e -> {
+
+                output.append("\n===== UTILIZADORES =====\n");
+
+                for (Utilizador u : biblioteca.getUtilizadores()) {
+                        output.append(u + "\n------------------\n");
+                }
+        });
+
         // Os restantes ActionListener seguem exatamente
         // a mesma lógica:
         //
