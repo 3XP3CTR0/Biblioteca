@@ -21,7 +21,7 @@ public class BibliotecaGUI extends JFrame {
         setLayout(new BorderLayout());
 
         // ===================== PAINEL DE BOTÕES =====================
-        JPanel panel = new JPanel(new GridLayout(4, 3, 5, 5));
+        JPanel panel = new JPanel(new GridLayout(5, 3, 5, 5));
 
         // ===================== BOTÕES DE LIVROS =====================
         JButton addLivro = new JButton("Adicionar Livro");
@@ -42,6 +42,10 @@ public class BibliotecaGUI extends JFrame {
         JButton historico = new JButton("Histórico");
         JButton limpar = new JButton("Limpar Tela");
 
+        // ====================== BUSCAS ===============================
+        JButton buscarLivro = new JButton("Buscar Livro");
+        JButton buscarUtilizador = new JButton("Buscar Utilizador");
+
         // Adiciona os botões ao painel
         panel.add(addLivro);
         panel.add(listarLivros);
@@ -57,6 +61,9 @@ public class BibliotecaGUI extends JFrame {
 
         panel.add(historico);
         panel.add(limpar);
+
+        panel.add(buscarLivro);
+        panel.add(buscarUtilizador);
 
         // coloca o painel no topo da janela
         add(panel, BorderLayout.NORTH);
@@ -86,6 +93,44 @@ public class BibliotecaGUI extends JFrame {
 
             for (Livro l : biblioteca.getLivros()) {
                 output.append(l.toString() + "\n----------------\n");
+            }
+        });
+
+        // ---- BUSCAR LIVRO POR ISBN ----
+        buscarLivro.addActionListener(e -> {
+
+            String isbn = JOptionPane.showInputDialog("ISBN do livro:");
+
+            Livro livro = biblioteca.buscarLivroISBN(isbn);
+
+            if (livro != null) {
+
+                output.append("\n--- LIVRO ENCONTRADO ---\n");
+                output.append(livro.toString() + "\n");
+
+            } else {
+
+                output.append("Livro não encontrado.\n");
+            }
+        });
+
+        // ---- BUSCAR UTILIZADOR POR ID ----
+        buscarUtilizador.addActionListener(e -> {
+
+            int id = Integer.parseInt(
+                    JOptionPane.showInputDialog("ID do utilizador:")
+            );
+
+            Utilizador u = biblioteca.buscarUtilizadorID(id);
+
+            if (u != null) {
+
+                output.append("\n--- UTILIZADOR ENCONTRADO ---\n");
+                output.append(u.toString() + "\n");
+
+            } else {
+
+                output.append("Utilizador não encontrado.\n");
             }
         });
 

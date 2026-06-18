@@ -183,8 +183,14 @@ public class Main {
                     // Buscar utilizador por ID
                     System.out.print("ID: ");
                     int id = sc.nextInt();
+                    
+                    Utilizador u = biblioteca.buscarUtilizadorID(id);
 
-                    System.out.println(biblioteca.buscarUtilizadorID(id));
+                    if (u != null) {
+                        System.out.println(u);
+                    } else {
+                        System.out.println("Utilizador não encontrado.");
+                    }
                 }
 
                 case 17 -> {
